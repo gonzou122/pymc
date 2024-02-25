@@ -9,3 +9,10 @@ RUN sudo apt-get update && apt-get -y install git
 pip install ipykernel
 python -m ipykernel install --user --name=temp_venv
 4:完了
+
+graphvizを使う場合PATHを通す必要がある
+import os
+# Replace 'path_to_graphviz_bin' with the actual path to your Graphviz 'bin' directory.
+graphviz_bin_path = '/opt/conda/envs/pymc-dev/bin/'
+# Append the Graphviz 'bin' directory to the PATH.
+os.environ["PATH"] += os.pathsep + graphviz_bin_path
