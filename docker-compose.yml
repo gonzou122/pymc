@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  jupyterlab:
+    image: pymc:kernel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - 'driver': 'nvidia'
+            'capabilities': ['gpu']
+    container_name: jupyterlab
+    ports:
+      - '8888:8888'
+    volumes:
+      - '.:/home/jovyan/work'
+    command:
+      jupyter lab
+          #--ip=*
+          #--allow-root
+          #--no-browser
+          #--NotebookApp.token='bamboo'
+    tty: true
+    stdin_open: true

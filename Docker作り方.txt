@@ -1,0 +1,11 @@
+1:pymcのgitからgit clone https://github.com/pymc-devs/pymc.git
+2:gitのdockerfileを修正
+USER root
+RUN sudo apt-get update && apt-get -y install git
+を追加
+3:出来上がったイメージにpymcのカーネルを追加するために
+　コンテナ立ち上げ後(bashで入るとpymc-devの仮想環境に最初から入っている)
+  ↑の状態で下のコマンドを実施
+pip install ipykernel
+python -m ipykernel install --user --name=temp_venv
+4:完了
