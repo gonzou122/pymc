@@ -7,7 +7,7 @@ RUN sudo apt-get update && apt-get -y install git
 　コンテナ立ち上げ後(bashで入るとpymc-devの仮想環境に最初から入っている)
   ↑の状態で下のコマンドを実施
 pip install ipykernel
-python -m ipykernel install --user --name=temp_venv
+python -m ipykernel install --user --name=pymc_env
 4:完了
 
 graphvizを使う場合PATHを通す必要がある
