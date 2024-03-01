@@ -11,6 +11,7 @@ python -m ipykernel install --user --name=pymc_env
 4:完了
 
 graphvizを使う場合PATHを通す必要がある
+Jupyternotebookで実行する場合↓のコードを最初に実施
 import os
 # Replace 'path_to_graphviz_bin' with the actual path to your Graphviz 'bin' directory.
 graphviz_bin_path = '/opt/conda/envs/pymc-dev/bin/'
