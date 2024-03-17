@@ -7,13 +7,25 @@ RUN sudo apt-get update && apt-get -y install git
 　コンテナ立ち上げ後(bashで入るとpymc-devの仮想環境に最初から入っている)
   ↑の状態で下のコマンドを実施
 pip install ipykernel
-python -m ipykernel install --user --name=pymc_env
+python -m ipykernel install --user --name=temp_venv
 4:完了
 
 graphvizを使う場合PATHを通す必要がある
-Jupyternotebookで実行する場合↓のコードを最初に実施
 import os
 # Replace 'path_to_graphviz_bin' with the actual path to your Graphviz 'bin' directory.
 graphviz_bin_path = '/opt/conda/envs/pymc-dev/bin/'
+#↑のパスはdockerのイメージ作成時の仮想環境名に左右されるため注意
 # Append the Graphviz 'bin' directory to the PATH.
 os.environ["PATH"] += os.pathsep + graphviz_bin_path
+
+サンプラーでBlackjaxを使う場合は
+1:gitからダウンロードしたpymcのDockerfileを修正
+environment-jax.ymlに変更
+COPY /conda-envs/environment-jax.yml .
+RUN mamba env create -f environment-jax.yml && \
+    /bin/bash -c ". activate pymc-test && \
+    mamba install -c conda-forge -y pymc"  && \
+    conda clean --all -f -y
+2：bashuを起動する場合の仮想環境名も修正
+　　RUN echo "conda activate pymc-test" >> ~/.bashrc && \
+    source ~/.bashrc
